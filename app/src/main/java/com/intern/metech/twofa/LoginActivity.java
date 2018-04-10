@@ -53,30 +53,29 @@ public class LoginActivity extends AppCompatActivity {
                             if(success){
                                 String authToken = jsonResponse.getString("authToken");
                                 String username = jsonResponse.getString("username");
-                                Intent intent = new Intent(LoginActivity.this, UserActivity.class);
-                                intent.putExtra("username", username);
-                                intent.putExtra("authToken", authToken);
-                                startActivity(intent);
+//                                Intent intent = new Intent(LoginActivity.this, UserActivity.class);
+//                                intent.putExtra("username", username);
+//                                intent.putExtra("authToken", authToken);
+//                                startActivity(intent);
+
                                 // if have 2FA setup
+                                // Bug
 
-//                                if(authToken == null)
-//                                {
-//                                    Intent intent = new Intent(LoginActivity.this, UserActivity.class);
-//                                    intent.putExtra("username", username);
-//                                    intent.putExtra("authToken", authToken);
-//                                    startActivity(intent);
-//
-//
-//                                }else{
-//                                    // goto verify code
-//                                    Intent intent = new Intent(LoginActivity.this, VerifyActivity.class);
-//                                    intent.putExtra("authToken", authToken);
-//                                    intent.putExtra("username", username);
-//                                    startActivity(intent);
-//
-//                                }
+                                if(authToken == null)
+                                {
+                                    Intent intent = new Intent(LoginActivity.this, UserActivity.class);
+                                    intent.putExtra("username", username);
+                                    intent.putExtra("authToken", authToken);
+                                    startActivity(intent);
 
+                                }else{
+                                    // goto verify code
+                                    Intent intent = new Intent(LoginActivity.this, VerifyActivity.class);
+                                    intent.putExtra("authToken", authToken);
+                                    intent.putExtra("username", username);
+                                    startActivity(intent);
 
+                                }
 
                             }else {
                                 AlertDialog.Builder b = new AlertDialog.Builder(LoginActivity.this);

@@ -15,8 +15,8 @@ public class VerifyRequest extends StringRequest{
         super(Method.POST, VERIFY_REQUEST_URL, listener, null );
         params = new HashMap<>();
         params.put("username", username);
+        params.put("authToken", authToken);
         params.put("code", code);
-        params.put("authKey", authToken);
 
     }
 

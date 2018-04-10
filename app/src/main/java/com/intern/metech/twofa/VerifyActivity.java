@@ -24,40 +24,41 @@ public class VerifyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_verify);
 
         final EditText code = findViewById(R.id.code);
-        final Button button = findViewById(R.id.button);
-
-        // get secret key to verify code
+        final Button verifyButton = findViewById(R.id.verifyButton);
         Intent intent = getIntent();
         final String authToken = intent.getStringExtra("authToken");
         final String username = intent.getStringExtra("username");
+        // get secret key to verify code
 
-        button.setOnClickListener(new View.OnClickListener() {
+
+        verifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String kod = code.getText().toString();
+
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
+                            AlertDialog.Builder b = new AlertDialog.Builder(VerifyActivity.this);
+                            b.setMessage(response)
+                                    .setNegativeButton("Retry", null)
+                                    .create()
+                                    .show();
+                            // SUCCESS IS FALSE ??? QUE ?
                             if(success)
                             {
-
-                                AlertDialog.Builder b = new AlertDialog.Builder(VerifyActivity.this);
-                                b.setMessage("OK")
-                                        .setNegativeButton("Retry", null)
-                                        .create()
-                                        .show();
-
                                 // go back to login to launch profile page
                                 Intent intent = new Intent(VerifyActivity.this, UserActivity.class);
                                 intent.putExtra("authToken", authToken);
                                 intent.putExtra("username", username);
                                 startActivity(intent);
-                            }else
+                            }
+                            else
                             {
-                                AlertDialog.Builder b = new AlertDialog.Builder(VerifyActivity.this);
+//                                AlertDialog.Builder b = new AlertDialog.Builder(VerifyActivity.this);
                                 b.setMessage("Register failed")
                                         .setNegativeButton("Retry", null)
                                         .create()
