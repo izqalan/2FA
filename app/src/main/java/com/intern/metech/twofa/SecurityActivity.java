@@ -1,6 +1,7 @@
 package com.intern.metech.twofa;
 
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -8,15 +9,9 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.warrenstrange.googleauth.GoogleAuthenticator;
-import com.warrenstrange.googleauth.GoogleAuthenticatorConfig;
-import com.warrenstrange.googleauth.GoogleAuthenticatorKey;
-import com.warrenstrange.googleauth.GoogleAuthenticatorQRGenerator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class SecurityActivity extends AppCompatActivity {
 
@@ -37,26 +32,26 @@ public class SecurityActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 // generate secret key
-                if(authToken == null)
+                if(authToken.equals("null"))
                 {
-
                     try {
                         JSONObject jsonResponse = new JSONObject(response);
                         boolean success = jsonResponse.getBoolean("success");
                         if(success)
                         {
+                            TextView secret = findViewById(R.id.secret);
                             Intent intent = getIntent();
-                            final String authToken = intent.getStringExtra("authToken");
-
+                            String key = intent.getStringExtra("authToken");
+                            secret.setText(key);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-
             }
         };
-        secret.setText(authToken);
+        String key = intent.getStringExtra("authToken");
+        secret.setText(key);
         SecretRequest secretRequest = new SecretRequest(username, responseListener);
         RequestQueue q = Volley.newRequestQueue(SecurityActivity.this);
         q.add(secretRequest);

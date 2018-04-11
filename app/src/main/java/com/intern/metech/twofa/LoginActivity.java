@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         final TextView registerHere = findViewById(R.id.registerHere);
         final Button login = findViewById(R.id.login);
 
+
         registerHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,8 +61,10 @@ public class LoginActivity extends AppCompatActivity {
 
                                 // if have 2FA setup
                                 // Bug
+                                String test = authToken;
 
-                                if(authToken == null)
+
+                                if(authToken == "null" )
                                 {
                                     Intent intent = new Intent(LoginActivity.this, UserActivity.class);
                                     intent.putExtra("username", username);
@@ -74,7 +77,6 @@ public class LoginActivity extends AppCompatActivity {
                                     intent.putExtra("authToken", authToken);
                                     intent.putExtra("username", username);
                                     startActivity(intent);
-
                                 }
 
                             }else {
