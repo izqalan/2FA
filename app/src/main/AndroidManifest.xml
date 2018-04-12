@@ -19,10 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".UserActivity" />
-        <activity android:name=".SecurityActivity" />
-        <activity android:name=".VerifyActivity"/>
+        <activity android:name=".RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UserActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SecurityActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".VerifyActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
