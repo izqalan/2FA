@@ -39,7 +39,7 @@
         android:layout_marginTop="8dp"
         android:text="Verify"
         android:textColor="@color/white"
-        android:background="@color/backgroundBtn"
+        android:background="@color/verifyBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
